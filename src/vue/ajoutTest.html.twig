@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+    {% if form.valide is defined %}
+    {% if form.valide == true %}
+        <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=listeTest">Retourner sur la liste des tests</a></h1>
+
+    {% else %}
+        <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1>
+        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=listeTest">Retourner sur la liste des tests</a></h1>
+
+    {% endif %}
+    {% else %}
+
+    <form method="POST" class=" col-md-12">
+        <h1 class="h3 mb-3 font-weight-normal">Ajouter un test</h1>
+        <label for="nom" class="sr-only ">Nom</label>
+        <textarea type="text" name="nom" id="nom" class="form-control" placeholder="Nom" required></textarea>
+        <button class="btn btn-sm btn-primary btn-block" type="submit" name="btAjoutTest">Ajouter</button>
+    </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,96 @@
+{# empty Twig template #}
+{% extends "base.html.twig" %}
+{% block style %} <link href="css/profil2.css" rel="stylesheet">{% endblock %}
+{% block contenu %}
+    {% if session.login is defined %}
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        {% if u.photo is not empty %}
+                            <img src="images/{{u.photo}}" alt= "image du produit " />
+                        {% else %}
+                            <img src="images/banderole.jpg" alt=""/>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            {{ u.nom }} {{ u.prenom }}
+                        </h5>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="profil-tab" data-toggle="tab" href="#profil" role="tab" aria-controls="profil" aria-selected="true">Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="resultats-tab" data-toggle="tab" href="#resultats" role="tab" aria-controls="resultats" aria-selected="false">Resultats</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="profile-edit-btn" type="submit" name="btModifier" id="btModifier"><a class="profile-edit-btn" href="index.php?page=modifProfil">Modifier</a> </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nom</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{u.nom}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Prenom</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{u.prenom}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ u.email }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Role</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{u.libellerole}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="resultats" role="tabpanel" aria-labelledby="profile-tab">
+                            {% for s in liste %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>{{ s.nom }}</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p> {{s.score}}/{{ s.nbQuestion }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <h2>Pour acceder a votre profil, veuillez vous connecter </h2>
+    {% endif %}
+{% endblock %}
