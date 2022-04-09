@@ -1,16 +1,11 @@
 {# empty Twig template #}
 {% extends "base.html.twig" %}
-{% block image %}
+{% block title %}{{parent()}}Accueil{% endblock %}
 
-    <div class="card bg-dark text-white">
-        <img src="images/accueil.jpg" class="card-img" alt="Accueil">
+{% block body %}
+    <h1 class="text-center text-primary"> MPMaster : Créez vos propres diagrammes MPM </h1>
+   {% if session.login is defined %}
+                    <h3>Bonjour {{session.login}}</h3>
+                  {% endif %}
 
-        <div class="card-img-overlay row">
-            <div class="col-md-2 col-sm-2"></div>
-            <h5 class = "col-md-10 col-sm-10" > Want to perfect your english ? Well this site may be for you ! You may sign up now and start learning !</h5>
-        </div>
-
-        <img src="images/learn.jpg" class="card-img" alt="Accueil">
-
-    </div>
 {% endblock %}

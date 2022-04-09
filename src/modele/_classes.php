@@ -1,6 +1,5 @@
 <?php
 require_once 'class_utilisateur.php';
-require_once 'class_question.php';
-require_once 'class_test.php';
-require_once 'class_score.php';
-require_once 'class_commentaire.php';
+require_once 'class_entreprise.php';
+require_once 'class_tache.php';
+require_once 'class_projet.php';
