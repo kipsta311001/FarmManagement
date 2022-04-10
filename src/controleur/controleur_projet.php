@@ -1,6 +1,6 @@
 <?php
 
-function actionAjoutProjet($twi, $db) {
+function actionAjoutProjet($twig, $db) {
     $form = array();
     if(isset($_POST['btAjoutProjet'])){
         $projet = new Projet($db);
