@@ -9,7 +9,7 @@ class Projet{
         $this->insert = $db->prepare("insert into projet(libelle) values(:libelle)");
     }
 
-    public function insert($libelle) { // Étape 3
+    public function insert($libelle) {
         $r = true;
         $this->insert->execute(array(':libelle'=>$libelle));
         if ($this->insert->errorCode() != 0) {
