@@ -8,6 +8,7 @@
 			<!-- Bootstrap CSS -->
 			<link href="https://bootswatch.com/5/lux/bootstrap.min.css" rel="stylesheet">
 					<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+					
 		{% endblock %}
 		<title>
 			{% block title %}MPMaster -
@@ -39,6 +40,10 @@
 								<a class="nav-link" href="index.php?page=connexion">Se connecter</a>
 								<span class="visually-hidden">(current)</span>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="index.php?page=abonnements">Abonnements</a>
+								<span class="visually-hidden">(current)</span>
+							</li>
 						</a>
 					</li>
 				{% else %}
@@ -46,12 +51,22 @@
 				</a>  
 			</li>
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mes projets</a>
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion </a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="index.php?page=ajoutProjet">Créer un projet</a>
 					<a class="dropdown-item" href="index.php?page=listeProjets">Consulter mes projets</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="index.php?page=ajoutTache">Ajouter une tache</a>
+				</div>
+			</li>
+				<!-- Si entreprise -->
+				<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="index.php?page=ajoutTache">Créer un projet</a>
+					<a class="dropdown-item" href="index.php?page=ajoutProjet">Ajouter un chef de projet</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="index.php?page=listeProjets">Ajouter un utilisateur</a>
 				</div>
 			</li>
 			<li class="nav-item">

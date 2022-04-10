@@ -13,6 +13,7 @@ function getPage($db)
     $lesPages['ajoutProjet'] = "actionAjoutProjet;0";
     $lesPages['ajoutTache'] = "actionAjoutTache;0";
     $lesPages['listeProjets'] = "actionListeProjets;0";
+    $lesPages['abonnements'] = "actionAbonnements;0";
    
     if ($db != null) {
         if (isset($_GET['page'])) {
