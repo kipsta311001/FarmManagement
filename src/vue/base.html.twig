@@ -50,29 +50,27 @@
 					
 				</a>  
 			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion </a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="index.php?page=ajoutProjet">Créer un projet</a>
-					<a class="dropdown-item" href="index.php?page=listeProjets">Consulter mes projets</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="index.php?page=ajoutTache">Ajouter une tache</a>
-				</div>
-			</li>
-				<!-- Si entreprise -->
+				{% if session.role == 2 %}
 				<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="index.php?page=ajoutTache">Créer un projet</a>
-					<a class="dropdown-item" href="index.php?page=ajoutProjet">Ajouter un chef de projet</a>
+					<a class="dropdown-item" href="index.php?page=ajoutProjet">Créer un projet</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="index.php?page=listeProjets">Ajouter un utilisateur</a>
+					<a class="dropdown-item" href="index.php?page=inscription">Ajouter un participant</a>
 				</div>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php?page=ajoutEntreprise">Ajouter une entreprise</a>
+				{% endif %}
+				<!-- Si Chef de projet -->
+				<li class="nav-item">
+				<a class="nav-link" href="index.php?page=ajoutEntreprise">Créer une tache</a>
 				<span class="visually-hidden">(current)</span>
 			</li>
+				<!-- endif -->
+				<!-- Si developpeur -->
+				<li class="nav-item">
+				<a class="nav-link" href="index.php?page=listeTacheByUtilisateur">Taches en cours</a>
+				<span class="visually-hidden">(current)</span>
+				</li>
+				<!-- endif -->
 		</ul>
 		<ul class="navbar-nav">
 			<li class="nav-item">

@@ -14,6 +14,7 @@ function getPage($db)
     $lesPages['ajoutTache'] = "actionAjoutTache;0";
     $lesPages['listeProjets'] = "actionListeProjets;0";
     $lesPages['abonnements'] = "actionAbonnements;0";
+    $lesPages['inscriptionEntreprise'] = "actioninscriptionEntreprise;0";
    
     if ($db != null) {
         if (isset($_GET['page'])) {

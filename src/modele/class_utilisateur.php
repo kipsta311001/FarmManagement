@@ -8,14 +8,14 @@ class Utilisateur{
 
     public function __construct($db){
         $this->db=$db;
-        $this->insert = $db->prepare("insert into utilisateur(email,mdp,nom,prenom,role) values(:email,:mdp,:nom,:prenom,:role)");
-        $this->connect = $db->prepare("select email, mdp, role from utilisateur where email=:email");
+        $this->insert = $db->prepare("insert into utilisateur(email,mdp,nom,prenom,id_role, id_entreprise) values(:email,:mdp,:nom,:prenom,:role, :entreprise)");
+        $this->connect = $db->prepare("select email, mdp, id_role, id_entreprise from utilisateur where email=:email");
         $this->selectByEmail = $db->prepare("select * from utilisateur where email=:email");
     }
 
-    public function insert($email, $mdp, $nom, $prenom,$role) { // Étape 3
+    public function insert($email, $mdp, $nom, $prenom,$role, $entreprise) { // Étape 3
         $r = true;
-        $this->insert->execute(array(':email' => $email, ':mdp' => $mdp, ':nom' => $nom, ':prenom' => $prenom, ':role' => $role));
+        $this->insert->execute(array(':email' => $email, ':mdp' => $mdp, ':nom' => $nom, ':prenom' => $prenom, ':role' => $role, ':entreprise' => $entreprise));
         if ($this->insert->errorCode() != 0) {
             print_r($this->insert->errorInfo());
             $r = false;
