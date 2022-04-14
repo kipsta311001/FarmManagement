@@ -1,11 +1,22 @@
-{# empty Twig template #}
-{% extends "base.html.twig" %}
-{% block title %}{{parent()}}Accueil{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BaseController!{% endblock %}
 
 {% block body %}
-    <h1 class="text-center text-primary"> MPMaster : Créez vos propres diagrammes MPM </h1>
-   {% if session.login is defined %}
-                    <h3>Bonjour {{session.login}}</h3>
-                  {% endif %}
 
+
+<div class="example-wrapper">
+<img src="../../templates/base/ab.jpg">
+
+<h1>Hello  ✅</h1>
+
+
+This friendly message is coming from:
+
+<ul>
+
+</ul>
+
+</div>
+  
 {% endblock %}
