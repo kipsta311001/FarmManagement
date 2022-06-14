@@ -25,46 +25,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                {% for p in listeParcelle %}
                   <tr>
-                    <td>123456789 </td>
-                    <td>Prairie </td>
-                    <td>1,53 ha</td>
+                    <td>{{p.idIlot}}</td>
+                    <td>{{p.libelle}}</td>
+                    <td>{{p.surface}} ha</td>
                     <td>
                       <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                       <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                       <a href="index.php?page=listeChamps&idChamp={{p.idParcelle}}&idIlot={{p.IdOfIlot}}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
                     </td>
                   </tr>
-                 <tr>
-                    <td>123456789 </td>
-                    <td>Prairie </td>
-                    <td>1,53 ha</td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                 <tr>
-                    <td>123456789 </td>
-                    <td>Prairie </td>
-                    <td>1,53 ha</td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>123456789 </td>
-                    <td>Prairie </td>
-                    <td>1,53 ha</td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>   
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -73,6 +45,16 @@
           <!-- /col-md-12 -->
         </div>
         <!-- /row -->
+        <br></br>
+        <div class="form-group ">
+					<div class="form-send">
+				  	<div class="col-sm-3">
+           
+							<a href="index.php?page=ajoutChamp"><button class="btn btn-compose" type="submit" name="btAjouter">Ajouter un champ</button> </a>
+             
+						</div>
+					</div>
+				</div>
       </section>
     </section>
     <!-- /MAIN CONTENT -->

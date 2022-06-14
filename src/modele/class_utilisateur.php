@@ -9,7 +9,7 @@ class Utilisateur{
     public function __construct($db){
         $this->db=$db;
         $this->insert = $db->prepare("insert into utilisateur(email,mdp,nom,prenom,id_role, id_entreprise) values(:email,:mdp,:nom,:prenom,:role, :entreprise)");
-        $this->connect = $db->prepare("select email, mdp, id_role from utilisateur where email=:email");
+        $this->connect = $db->prepare("select id, email, mdp, id_role from utilisateur where email=:email");
         $this->selectByEmail = $db->prepare("select * from utilisateur where email=:email");
     }
 

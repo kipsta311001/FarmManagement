@@ -8,7 +8,14 @@ function getPage($db)
     $lesPages['deconnexion'] = "actionDeconnexion;0";
     $lesPages['maintenance'] = "actionMaintenance;0";
     $lesPages['listeChamps'] = "actionlisteChamps;0";
-   
+    $lesPages['ajoutChamp'] = "actionAjoutChamps;0";
+    $lesPages['sol'] = "actionSol;0";
+    $lesPages['semis'] = "actionSemis;0";
+    $lesPages['culture'] = "actionCulture;0";
+    $lesPages['traitement'] = "actionTraitement;0";
+    $lesPages['engrais'] = "actionEngrais;0";
+    $lesPages['recolte'] = "actionRecolte;0";
+
     if ($db != null) {
         if (isset($_GET['page'])) {
             $page = $_GET['page'];

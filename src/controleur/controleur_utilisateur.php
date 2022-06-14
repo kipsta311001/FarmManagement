@@ -20,6 +20,7 @@ function actionConnexion($twig,$db){
             else{
                 $_SESSION['login'] = $email;
                 $_SESSION['role'] = $unUtilisateur['id_role'];
+                $_SESSION['idUtilisateur'] = $unUtilisateur['id'];
                 header("Location:index.php?page=accueil");
             }
         }
