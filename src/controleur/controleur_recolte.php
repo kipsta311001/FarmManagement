@@ -12,7 +12,7 @@ function actionRecolte($twig, $db) {
             $checkboxParcelle = array();
         }
 
-        $sol = new Sol($db);
+        $recolte = new Recolte($db);
         $cout = floatval($_POST['cout']);
         // si pas de parcelle selectionné
         if(sizeof($checkboxParcelle) == 0){
@@ -21,7 +21,6 @@ function actionRecolte($twig, $db) {
         }else{
            
             $listeSurfaceCheck = array();
-            var_dump($checkboxParcelle);
             foreach($checkboxParcelle as $idParcelle) //pour toutes les parcelles cochés
             {
                 // Si plusieurs parcelle cochés
@@ -30,7 +29,7 @@ function actionRecolte($twig, $db) {
                     $surfaceTotal = 0;
                 }else{ 
                     //Sinon faire l'insert direct
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $recolte->insert($idParcelle, $_POST['rendement'], $_POST['date_intervention'], $_POST['vente'],  $cout);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
@@ -50,7 +49,7 @@ function actionRecolte($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $recolte->insert($idParcelle, $_POST['rendement'], $_POST['date_intervention'], $_POST['vente'],  $cout);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";

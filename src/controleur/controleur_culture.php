@@ -12,7 +12,7 @@ function actionCulture($twig, $db) {
             $checkboxParcelle = array();
         }
 
-        $sol = new Sol($db);
+        $culture = new Culture($db);
         $cout = floatval($_POST['cout']);
         // si pas de parcelle selectionné
         if(sizeof($checkboxParcelle) == 0){
@@ -30,7 +30,7 @@ function actionCulture($twig, $db) {
                     $surfaceTotal = 0;
                 }else{ 
                     //Sinon faire l'insert direct
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $culture->insert($idParcelle, $_POST['name'], $_POST['date_intervention'],  $cout);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
@@ -50,7 +50,7 @@ function actionCulture($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $culture->insert($idParcelle, $_POST['name'], $_POST['date_intervention'],  $cout);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";

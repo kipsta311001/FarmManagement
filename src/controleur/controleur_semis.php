@@ -12,7 +12,7 @@ function actionSemis($twig, $db) {
             $checkboxParcelle = array();
         }
 
-        $sol = new Sol($db);
+        $semis = new Semis($db);
         $cout = floatval($_POST['cout']);
         // si pas de parcelle selectionné
         if(sizeof($checkboxParcelle) == 0){
@@ -21,16 +21,16 @@ function actionSemis($twig, $db) {
         }else{
            
             $listeSurfaceCheck = array();
-            var_dump($checkboxParcelle);
             foreach($checkboxParcelle as $idParcelle) //pour toutes les parcelles cochés
             {
                 // Si plusieurs parcelle cochés
+                var_dump($idParcelle);
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     array_push($listeSurfaceCheck, $parcelle->selectSurfaceCheck($idParcelle));
                     $surfaceTotal = 0;
                 }else{ 
                     //Sinon faire l'insert direct
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $semis->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
@@ -50,7 +50,7 @@ function actionSemis($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $semis->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
