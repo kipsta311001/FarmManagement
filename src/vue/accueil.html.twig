@@ -10,29 +10,23 @@
 			<section class="wrapper">
 				<h3>
 					<i class="fa fa-angle-right"></i>
-					Flot Charts</h3>
-				<div id="morris">
+					Prix du Marché</h3>
+					{% for semence in semences %}
+       					 
+						 <div id="morris">
 					<div class="col-lg-6">
 						<div class="content-panel">
 							<h4>
 								<i class="fa fa-angle-right"></i>
-								Chart Example 3</h4>
+								Prix de {{ semenceNom[loop.index-1]["variete"] |upper}} en Euro/Tonne</h4>
 							<div class="panel-body">
-								<div id="blé dure" class="graph"></div>
+								<div id="{{ semence }}" class="graph"></div>
 							</div>
 						</div>
 					</div>
-					<div id="morris">
-					<div class="col-lg-12">
-						<div class="content-panel">
-							<h4>
-								<i class="fa fa-angle-right"></i>
-								Chart Example 3</h4>
-							<div class="panel-body">
-								<div id="hero-area" class="graph"></div>
-							</div>
-						</div>
-					</div>
+   					 {% endfor %}
+				
+				
 
 
 		</section>

@@ -1,9 +1,20 @@
 <?php
 
-function actionAccueil($twig) {
+function actionAccueil($twig, $db) {
     $form = array();
     var_dump($_SESSION);
-    echo $twig->render('accueil.html.twig', array());
+    $semis = new Semis($db);
+    $listeSemis = $semis->semenceByID($_SESSION['idUtilisateur']);
+    $listeResult= [];
+
+    foreach($listeSemis as $semence) //pour toutes les parcelles cochés
+    {
+        $semence[0] = iconv('utf-8','ASCII//IGNORE//TRANSLIT',$semence[0]);
+        array_push($listeResult, $semence[0]);
+        
+    }
+    var_dump($listeSemis);
+    echo $twig->render('accueil.html.twig', array('semences'=>$listeResult, 'semenceNom' => $listeSemis));
 }
 
 function actionMentions($twig){

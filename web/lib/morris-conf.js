@@ -5,12 +5,13 @@ var Script = function () {
     
     $(function () {
       $.ajax({
-        url:"../src/controleur/api.php",    //the page containing php script
+        url:"http://serveur1.arras-sio.com/symfony4-4066/poinB3/web/index.php?page=api",    //the page containing php script
         type: "post",    //request type,
         dataType: 'json',
-        data: {registration: "success", name: "xyz", email: "abc@gmail.com"},
+        data: {fonction: "f"},
         success:function(result){
             var elements = [];
+            console.log(result);
             var date = result.splice(0,1);
             
             for (const element of result){
@@ -24,6 +25,7 @@ var Script = function () {
                 data["period"] = date[0][i];
                 data[element[0]] = element[i];
                 dataStat.push(data);
+                console.log(element[0]);
               }
               Morris.Area({
                 element: element[0],

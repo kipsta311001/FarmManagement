@@ -2,7 +2,7 @@
 
 function actionEngrais($twig, $db) {
     $form = array();
-   
+
     $parcelle = new Parcelle($db);
     $listeParcelle = $parcelle->selectByUtilisateur($_SESSION['login']);
     if(isset($_POST['btValider'])){
@@ -11,15 +11,13 @@ function actionEngrais($twig, $db) {
         }else{
             $checkboxParcelle = array();
         }
-
-        $sol = new Sol($db);
+        $engrais = new Engrais($db);
         $cout = floatval($_POST['cout']);
         // si pas de parcelle selectionné
         if(sizeof($checkboxParcelle) == 0){
             $form['valide'] = false;
             $form['message'] = "Attention, vous n'avez sélectionné aucun champs pour cette intervention";
         }else{
-           
             $listeSurfaceCheck = array();
             var_dump($checkboxParcelle);
             foreach($checkboxParcelle as $idParcelle) //pour toutes les parcelles cochés
@@ -30,11 +28,20 @@ function actionEngrais($twig, $db) {
                     $surfaceTotal = 0;
                 }else{ 
                     //Sinon faire l'insert direct
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
-                    if (!$exec) {
-                        $form['valide'] = false;
-                        $form['message'] = "Probleme d'insertion de l'intervention";
+                    if(isset($_POST['engraisType'])){
+                        $exec = $engrais->insert_min($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        if (!$exec) {
+                            $form['valide'] = false;
+                            $form['message'] = "Probleme d'insertion de l'intervention";
+                        }
+                    }else{
+                        $exec = $engrais->insert_org($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        if (!$exec) {
+                            $form['valide'] = false;
+                            $form['message'] = "Probleme d'insertion de l'intervention";
+                        }
                     }
+                   
                     $surfaceTotal = 1;
                 }
             }
@@ -50,10 +57,18 @@ function actionEngrais($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
-                    if (!$exec) {
-                        $form['valide'] = false;
-                        $form['message'] = "Probleme d'insertion de l'intervention";
+                    if(isset($_POST['engraisType'])){
+                        $exec = $engrais->insert_min($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        if (!$exec) {
+                            $form['valide'] = false;
+                            $form['message'] = "Probleme d'insertion de l'intervention";
+                        }
+                    }else{
+                        $exec = $engrais->insert_org($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        if (!$exec) {
+                            $form['valide'] = false;
+                            $form['message'] = "Probleme d'insertion de l'intervention";
+                        }
                     }
                 }
             }

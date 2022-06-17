@@ -29,7 +29,7 @@ function actionSol($twig, $db) {
         }else{
            
             $listeSurfaceCheck = array();
-            var_dump($checkboxParcelle);
+            //var_dump($checkboxParcelle);
             foreach($checkboxParcelle as $idParcelle) //pour toutes les parcelles cochés
             {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){

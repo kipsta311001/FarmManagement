@@ -7,13 +7,14 @@ class Semis{
 
     public function __construct($db){
         $this->db=$db;
-        $this->insert = $db->prepare("insert into travail_du_sol(idParcelle, nom, date_intervention, description, cout) values(:idParcelle, :nom, :date_intervention, :description, :cout)");
         $this->semenceByID = $db->prepare("SELECT semence.variete from semence, parcelle, ilots, utilisateur where semence.idParcelle = parcelle.id AND parcelle.idIlot = ilots.id AND ilots.idUtilisateur = utilisateur.id  AND utilisateur.id = :id");
+        $this->insert = $db->prepare("insert into semence(idParcelle, variete, date_intervention, quantite_ha, cout) values(:idParcelle, :variete, :date_intervention, :quantite, :cout)");
+
     }
 
-    public function insert($idParcelle, $nom, $date_intervention, $description, $cout) {
+    public function insert($idParcelle, $variete, $date_intervention, $quantite, $cout) {
         $r = true;
-        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':nom'=>$nom, ':date_intervention'=>$date_intervention, ':description'=>$description, ':cout'=>$cout));
+        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':variete'=>$variete, ':date_intervention'=>$date_intervention, ':quantite'=>$quantite, ':cout'=>$cout));
         if ($this->insert->errorCode() != 0) {
             print_r($this->insert->errorInfo());
             $r = false;
@@ -26,7 +27,7 @@ class Semis{
         if ($this->semenceByID->errorCode()!=0){
             print_r($this->semenceByID->errorInfo());
         }
-        return $this->semenceByID->fetch();
+        return $this->semenceByID->fetchAll();
     }
 
 }

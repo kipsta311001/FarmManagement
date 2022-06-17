@@ -33,7 +33,7 @@
 						<div class=" form">
 							<form class="cmxform form-horizontal style-form" method="post">
 								<div class="form-group ">
-									<label for="cname" class="control-label col-lg-2">Variété</label>
+									<label for="cname" class="control-label col-lg-2">Nom du produit</label>
 									<div class="col-lg-10">
 										<input class=" form-control" id="cname" name="name" minlength="2" type="text" required/>
 									</div>
@@ -45,9 +45,9 @@
 									</div>
 								</div>
 								<div class="form-group ">
-									<label for="quantite" class="control-label col-lg-2">Quantité ( en kg/ha ) :</label>
+									<label for="quantite" class="control-label col-lg-2">Quantité ( en L / ha ) :</label>
 									<div class="col-lg-10">
-										<input class="form-control " name="quantite" id="quantite" type="number" step='0.01' />
+										<input class="form-control " name="quantite" id="quantite" type="number" step='0.01' required/>
 									</div>
 								</div>
 								<div class="form-group ">
@@ -72,7 +72,7 @@
 									<tbody>
 										{% for p in parcelles %}
 											<tr>
-												<td><input type="checkbox" name="checkboxParcelle[]" value="{{p.id}}"></td>
+												<td><input type="checkbox" name="checkboxParcelle[]" value="{{p.idParcelle}}"></td>
 												<td>{{p.idIlot}}</td>
 												<td>{{p.libelle}}</td>
 												<td>{{p.surface}}</td>
