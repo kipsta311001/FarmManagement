@@ -3,7 +3,7 @@
 function actionAccueil($twig) {
     $form = array();
     var_dump($_SESSION);
-    echo $twig->render('index.html.twig', array());
+    echo $twig->render('accueil.html.twig', array());
 }
 
 function actionMentions($twig){
