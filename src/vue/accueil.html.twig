@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue
+{% endblock %}
+
+{% block content %}
+
+	<section id="container" onload="myAPI()">
+		<section id="main-content">
+			<section class="wrapper">
+				<h3>
+					<i class="fa fa-angle-right"></i>
+					Prix du Marché</h3>
+					{% for semence in semences %}
+       					 
+						 <div id="morris">
+					<div class="col-lg-6">
+						<div class="content-panel">
+							<h4>
+								<i class="fa fa-angle-right"></i>
+								Prix de {{ semenceNom[loop.index-1]["variete"] |upper}} en Euro/Tonne</h4>
+							<div class="panel-body">
+								<div id="{{ semence }}" class="graph"></div>
+							</div>
+						</div>
+					</div>
+   					 {% endfor %}
+				
+				
+
+
+		</section>
+	</section>
+</section>
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script src="lib/raphael/raphael.min.js"></script>
+<script src="lib/morris/morris.min.js"></script><!--common script for all pages-->
+
+<script src="lib/morris-conf.js"></script>{% endblock %}
