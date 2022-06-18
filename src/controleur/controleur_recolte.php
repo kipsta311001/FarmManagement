@@ -29,7 +29,7 @@ function actionRecolte($twig, $db) {
                     $surfaceTotal = 0;
                 }else{ 
                     //Sinon faire l'insert direct
-                    $exec = $recolte->insert($idParcelle, $_POST['rendement'], $_POST['date_intervention'], $_POST['vente'],  $cout);
+                    $exec = $recolte->insert($idParcelle, $_POST['rendement'], $_POST['date_intervention'], $_POST['vente'],  $cout, 'Recolte');
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
@@ -49,7 +49,7 @@ function actionRecolte($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $recolte->insert($idParcelle, $_POST['rendement'], $_POST['date_intervention'], $_POST['vente'],  $cout);
+                    $exec = $recolte->insert($idParcelle, $_POST['rendement'], $_POST['date_intervention'], $_POST['vente'],  $cout, 'Recolte');
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";

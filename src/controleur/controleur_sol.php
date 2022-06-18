@@ -36,7 +36,7 @@ function actionSol($twig, $db) {
                     array_push($listeSurfaceCheck, $parcelle->selectSurfaceCheck($idParcelle));
                     $surfaceTotal = 0;
                 }else{
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout, 'Travail du sol');
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
@@ -56,7 +56,7 @@ function actionSol($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout);
+                    $exec = $sol->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['description'],  $cout, 'Travail du sol');
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";

@@ -29,13 +29,13 @@ function actionEngrais($twig, $db) {
                 }else{ 
                     //Sinon faire l'insert direct
                     if(isset($_POST['engraisType'])){
-                        $exec = $engrais->insert_min($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        $exec = $engrais->insert_min($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout, 'Engrais minéral');
                         if (!$exec) {
                             $form['valide'] = false;
                             $form['message'] = "Probleme d'insertion de l'intervention";
                         }
                     }else{
-                        $exec = $engrais->insert_org($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        $exec = $engrais->insert_org($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout, 'Engrais organique');
                         if (!$exec) {
                             $form['valide'] = false;
                             $form['message'] = "Probleme d'insertion de l'intervention";
@@ -58,13 +58,13 @@ function actionEngrais($twig, $db) {
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
                     if(isset($_POST['engraisType'])){
-                        $exec = $engrais->insert_min($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        $exec = $engrais->insert_min($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout, 'Engrais minéral');
                         if (!$exec) {
                             $form['valide'] = false;
                             $form['message'] = "Probleme d'insertion de l'intervention";
                         }
                     }else{
-                        $exec = $engrais->insert_org($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                        $exec = $engrais->insert_org($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout, 'Engrais organique');
                         if (!$exec) {
                             $form['valide'] = false;
                             $form['message'] = "Probleme d'insertion de l'intervention";

@@ -30,7 +30,7 @@ function actionSemis($twig, $db) {
                     $surfaceTotal = 0;
                 }else{ 
                     //Sinon faire l'insert direct
-                    $exec = $semis->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                    $exec = $semis->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout, 'Semis');
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
@@ -50,7 +50,7 @@ function actionSemis($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $semis->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                    $exec = $semis->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout, 'Semis');
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";

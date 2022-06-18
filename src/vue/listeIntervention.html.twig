@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesChampsController!{% endblock %}
+
+{% block content %}
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+     <section id="main-content">
+      <section class="wrapper site-min-height">
+        <!-- page start-->
+        <div class="chat-room mt">
+          <aside class="mid-side">
+            <div class="chat-room-head">
+              <h3>Liste des interventions</h3>
+              <a href="#" class="pull-right btn btn-theme02">Statistiques</a>
+            </div>
+             
+            <div class="room-desk">
+            {% for i in listeIntervention %}
+
+              <div class="room-box">
+              <div class="col-md-8">
+              <h5 class="text-primary">{{i.iType}} {% if i.isActive == 1 %} ( En attente de validation ) {% endif %}</h5>
+                <p>Date : {{i.date_intervention}}</p>
+                {% if  i.iType == "Traitement" %}
+                <p>Produit : {{i.produit}}</p>
+                <p>Quantite : {{i.quantite_ha}} L / ha</p>
+                {% elseif  i.iType == "Culture intermediaire" %}
+                <p>Nom : {{i.nom}}</p>
+                {% elseif  i.iType == "Engrais organique" or i.iType == "Engrais minéral" %}
+                <p>Nom : {{i.nom}}</p>
+                <p>Quantite : {{i.quantite_ha}} L / ha</p>
+                {% elseif  i.iType == "Travail du sol" %}
+                <p>Nom : {{i.nom}}</p>
+                <p>Description : {{i.description}}</p>
+                {% elseif  i.iType == "Semis" %}
+                <p>Variete : {{i.variete}}</p>
+                <p>Quantite : {{i.quantite_ha}} L / ha</p>
+                {% elseif  i.iType == "Recolte" %}
+                <p>Rendement : {{i.rendement}}</p>
+                <p>Prix de vente : {{i.prix_vente}} € / T</p>
+                {% endif %}
+                <p>Cout : {{i.cout}}</p>
+              </div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
+              <div class="col-md-1">
+              {% if  i.isActive == 1 %}
+                 <a href="index.php?page=intervention&idParcelle={{idParcelle}}&idIntervention={{i.id}}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>
+               {% endif %} 
+                <a href="index.php?page=intervention&idParcelle={{idParcelle}}&idDel={{i.id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a></div>
+              </div>
+              {% endfor %}
+            </div>
+  
+          </aside>
+        </div>
+        <!-- page end-->
+      </section>
+      <!-- /wrapper -->
+    </section>
+
+  
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+{% endblock %}

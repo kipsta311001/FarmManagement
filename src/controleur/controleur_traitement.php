@@ -14,6 +14,12 @@ function actionTraitement($twig, $db) {
 
         $phyto = new Traitement($db);
         $cout = floatval($_POST['cout']);
+        $duree = $_POST['duree'];
+        $dateIntervention = $_POST['date_intervention'];
+        $next = ' + '.$duree.' days';
+        $nextDate = date('Y-m-d', strtotime($dateIntervention. $next));
+        var_dump($next);
+        var_dump($nextDate);
         // si pas de parcelle selectionné
         if(sizeof($checkboxParcelle) == 0){
             $form['valide'] = false;
@@ -30,7 +36,8 @@ function actionTraitement($twig, $db) {
                     $surfaceTotal = 0;
                 }else{ 
                     //Sinon faire l'insert direct
-                    $exec = $phyto->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                    $exec = $phyto->insert($idParcelle, $_POST['name'], $dateIntervention, $_POST['quantite'],  $cout, 'Traitement', 0);
+                    $exec = $phyto->insert($idParcelle, $_POST['name'], $nextDate, $_POST['quantite'],  $cout, 'Traitement', 1);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
@@ -50,7 +57,8 @@ function actionTraitement($twig, $db) {
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     $maSurface = $parcelle->selectSurfaceCheck($idParcelle);
                     $cout = $prixByHa * $maSurface[0]['surface'];
-                    $exec = $phyto->insert($idParcelle, $_POST['name'], $_POST['date_intervention'], $_POST['quantite'],  $cout);
+                    $exec = $phyto->insert($idParcelle, $_POST['name'], $dateIntervention, $_POST['quantite'],  $cout, 'Traitement', 0);
+                    $exec = $phyto->insert($idParcelle, $_POST['name'], $nextDate, $_POST['quantite'],  $cout, 'Traitement', 0);
                     if (!$exec) {
                         $form['valide'] = false;
                         $form['message'] = "Probleme d'insertion de l'intervention";
