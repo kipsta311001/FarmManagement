@@ -2,6 +2,7 @@
 
 function actionAccueil($twig, $db) {
     $form = array();
+    
     $semis = new Semis($db);
     $listeSemis = $semis->semenceByID($_SESSION['idUtilisateur']);
     $listeResult= [];
@@ -12,6 +13,7 @@ function actionAccueil($twig, $db) {
         array_push($listeResult, $semence[0]);
         
     }
+    
     echo $twig->render('accueil.html.twig', array('semences'=>$listeResult, 'semenceNom' => $listeSemis));
 }
 

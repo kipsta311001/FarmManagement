@@ -12,7 +12,7 @@ class Recolte{
 
     public function insert($idParcelle, $rendement, $date_intervention, $prix_vente, $cout, $idType) {
         $r = true;
-        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':rendement'=>$rendement, ':date_intervention'=>$date_intervention, ':prix_vente'=>$prix_vente, ':cout'=>$cout , ':iType'=>$iType));
+        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':rendement'=>$rendement, ':date_intervention'=>$date_intervention, ':prix_vente'=>$prix_vente, ':cout'=>$cout , ':iType'=>$idType));
         if ($this->insert->errorCode() != 0) {
             print_r($this->insert->errorInfo());
             $r = false;
