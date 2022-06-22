@@ -14,7 +14,7 @@ class Semis{
 
     public function insert($idParcelle, $variete, $date_intervention, $quantite, $cout, $idType) {
         $r = true;
-        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':variete'=>$variete, ':date_intervention'=>$date_intervention, ':quantite'=>$quantite, ':cout'=>$cout, ':iType'=>$iType));
+        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':variete'=>$variete, ':date_intervention'=>$date_intervention, ':quantite'=>$quantite, ':cout'=>$cout, ':iType'=>$idType));
         if ($this->insert->errorCode() != 0) {
             print_r($this->insert->errorInfo());
             $r = false;

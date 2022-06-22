@@ -12,7 +12,7 @@ class Sol{
 
     public function insert($idParcelle, $nom, $date_intervention, $description, $cout, $idType) {
         $r = true;
-        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':nom'=>$nom, ':date_intervention'=>$date_intervention, ':description'=>$description, ':cout'=>$cout, ':iType'=>$iType));
+        $this->insert->execute(array(':idParcelle'=>$idParcelle, ':nom'=>$nom, ':date_intervention'=>$date_intervention, ':description'=>$description, ':cout'=>$cout, ':iType'=>$idType));
         if ($this->insert->errorCode() != 0) {
             print_r($this->insert->errorInfo());
             $r = false;
