@@ -5,7 +5,7 @@ var Script = function () {
     
     $(function () {
       $.ajax({
-        url:"http://serveur1.arras-sio.com/symfony4-4066/poinB3/web/index.php?page=api",    //the page containing php script
+        url:"http://serveur1.arras-sio.com/symfony4-4061/projetPoinB3/web/index.php?page=api",    //the page containing php script
         type: "post",    //request type,
         dataType: 'json',
         data: {fonction: "f"},

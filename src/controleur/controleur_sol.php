@@ -47,7 +47,6 @@ function actionSol($twig, $db) {
             foreach($listeSurfaceCheck as $uneSurface)
             {
                 $surfaceTotal = $surfaceTotal + floatval($uneSurface[0]['surface']);
-                var_dump($surfaceTotal);
             }
             $prixByHa = $cout / $surfaceTotal;
 

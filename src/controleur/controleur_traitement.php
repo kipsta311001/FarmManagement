@@ -27,7 +27,6 @@ function actionTraitement($twig, $db) {
         }else{
            
             $listeSurfaceCheck = array();
-            var_dump($checkboxParcelle);
             foreach($checkboxParcelle as $idParcelle) //pour toutes les parcelles cochés
             {
                 // Si plusieurs parcelle cochés

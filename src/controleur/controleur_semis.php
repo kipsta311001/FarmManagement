@@ -24,7 +24,6 @@ function actionSemis($twig, $db) {
             foreach($checkboxParcelle as $idParcelle) //pour toutes les parcelles cochés
             {
                 // Si plusieurs parcelle cochés
-                var_dump($idParcelle);
                 if(sizeof($checkboxParcelle) > 1 && $cout != 0){
                     array_push($listeSurfaceCheck, $parcelle->selectSurfaceCheck($idParcelle));
                     $surfaceTotal = 0;

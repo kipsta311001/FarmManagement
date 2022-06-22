@@ -2,22 +2,22 @@
 function getPage($db)
 {
 
-    $lesPages['accueil'] = "actionAccueil;0";
-    $lesPages['inscription'] = "actionInscription;0";
+    $lesPages['accueil'] = "actionAccueil;1";
+    $lesPages['inscription'] = "actionInscription;1";
     $lesPages['login'] = "actionConnexion;0";
     $lesPages['deconnexion'] = "actionDeconnexion;0";
-    $lesPages['maintenance'] = "actionMaintenance;0";
-    $lesPages['listeChamps'] = "actionlisteChamps;0";
-    $lesPages['ajoutChamp'] = "actionAjoutChamps;0";
-    $lesPages['sol'] = "actionSol;0";
-    $lesPages['semis'] = "actionSemis;0";
-    $lesPages['culture'] = "actionCulture;0";
-    $lesPages['traitement'] = "actionTraitement;0";
-    $lesPages['engrais'] = "actionEngrais;0";
-    $lesPages['recolte'] = "actionRecolte;0";
-    $lesPages['intervention'] = "actionlisteIntervention;0";
-    $lesPages['api'] = "actionApi;0";
-    $lesPages['stats'] = "actionStats;0";
+    $lesPages['maintenance'] = "actionMaintenance;1";
+    $lesPages['listeChamps'] = "actionlisteChamps;1";
+    $lesPages['ajoutChamp'] = "actionAjoutChamps;1";
+    $lesPages['sol'] = "actionSol;1";
+    $lesPages['semis'] = "actionSemis;1";
+    $lesPages['culture'] = "actionCulture;1";
+    $lesPages['traitement'] = "actionTraitement;1";
+    $lesPages['engrais'] = "actionEngrais;1";
+    $lesPages['recolte'] = "actionRecolte;1";
+    $lesPages['intervention'] = "actionlisteIntervention;1";
+    $lesPages['api'] = "actionApi;1";
+    $lesPages['stats'] = "actionStats;1";
 
     if ($db != null) {
         if (isset($_GET['page'])) {

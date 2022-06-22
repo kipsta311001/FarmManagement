@@ -21,7 +21,6 @@ function actionAjoutChamps($twig, $db) {
     $ilotExist = false;
     $parcelle = new Parcelle($db);
     $ilot = new Ilots($db);
-    var_dump($_SESSION['idUtilisateur']);
     if(isset($_POST['btAjouter'])){
         $listeIlot = $ilot->selectByUtilisateur($_SESSION['idUtilisateur']);
         foreach($listeIlot as $unIlot){

@@ -7,8 +7,8 @@ if(isset($_POST['fonction'])){
 function actionApi(){
 
 $config['serveur']='localhost';
-$config['login'] = 'login4066';
-$config['mdp'] ='ZpOHhSeWUcUkAhG';
+$config['login'] = 'login4061';
+$config['mdp'] ='CHohAQLpbbYXomb';
 $config['bd'] = 'poinB3';
 $db = connect($config);
 $semis = new Semis($db);
