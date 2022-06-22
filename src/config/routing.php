@@ -17,6 +17,7 @@ function getPage($db)
     $lesPages['recolte'] = "actionRecolte;0";
     $lesPages['intervention'] = "actionlisteIntervention;0";
     $lesPages['api'] = "actionApi;0";
+    $lesPages['stats'] = "actionStats;0";
 
     if ($db != null) {
         if (isset($_GET['page'])) {

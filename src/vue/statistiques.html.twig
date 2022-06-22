@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block content %}
+
+<!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Statistiques</h3>
+        <div class="row mt">
+          <div class="col-lg-12">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> {{parcelle[0].libelle}}</h4>
+              <section id="unseen">
+                <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr>
+                      <th>id</th>
+                      <th>Culture</th>
+                      <th>Rendement</th>
+                      <th>Prix de vente</th>
+                      <th>Charges totales</th>
+                      <th>Charges / Ha</th>
+                      <th>Chiffre d'affaire</th>
+                      <th>Benefice</th>
+                      <th>Benefice / Ha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{parcelle[0].id}}</td>
+                      <td>{{variete}}</td>
+                      <td>{{rendement}}</td>
+                      <td>{{prix_vente}}</td>
+                      <td>{{charge}}</td>
+                      <td>{{coutByHa}}</td>
+                      <td>{{ca}}</td>
+                      <td>{{benef}}</td>
+                      <td>{{benefByHa}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-lg-4 -->
+        </div>
+    </section>
+    </section>
+
+    {% endblock %}
