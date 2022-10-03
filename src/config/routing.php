@@ -2,49 +2,41 @@
 function getPage($db)
 {
 
-    $lesPages['accueil'] = "actionAccueil;1";
-    $lesPages['inscription'] = "actionInscription;1";
-    $lesPages['login'] = "actionConnexion;0";
+    $lesPages['accueil'] = "actionAccueil;0";
+    $lesPages['mesprestations'] = "actionMesPrestations;0";
+    $lesPages['listeClient'] = "actionListeClient;0";
+    $lesPages['ajoutClient'] = "actionAjoutClient;0";
+    $lesPages['ajoutIntervention'] = "actionAjoutIntervention;0";
+    $lesPages['listeIntervention'] = "actionListeIntervention;0";
     $lesPages['deconnexion'] = "actionDeconnexion;0";
-    $lesPages['maintenance'] = "actionMaintenance;1";
-    $lesPages['listeChamps'] = "actionlisteChamps;1";
-    $lesPages['ajoutChamp'] = "actionAjoutChamps;1";
-    $lesPages['sol'] = "actionSol;1";
-    $lesPages['semis'] = "actionSemis;1";
-    $lesPages['culture'] = "actionCulture;1";
-    $lesPages['traitement'] = "actionTraitement;1";
-    $lesPages['engrais'] = "actionEngrais;1";
-    $lesPages['recolte'] = "actionRecolte;1";
-    $lesPages['intervention'] = "actionlisteIntervention;1";
-    $lesPages['api'] = "actionApi;1";
-    $lesPages['stats'] = "actionStats;1";
+    $lesPages['maintenance'] = "actionMaintenance;0";
 
     if ($db != null) {
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {
-            $page = 'login';
+            $page = 'accueil';
         }
 
         if (!isset($lesPages[$page])) {
-            $page = 'login';
+            $page = 'accueil';
         } 
         $explose = explode(";", $lesPages[$page]); // Nous découpons la ligne du tableau sur le  // caractère « ; » Le résultat est stocké dans le tableau $explose
         $role = $explose[1]; // Le rôle est dans la 2ème partie du tableau $explose
         if ($role != 0) { // Si mon rôle nécessite une vérification
-            if (isset($_SESSION['login'])) {  // Si je me suis authentifié
+            if (isset($_SESSION['accueil'])) {  // Si je me suis authentifié
                 if (isset($_SESSION['role'])) {  // Si j’ai bien un rôle
                     if ($role != $_SESSION['role']) { // Si mon rôle ne correspond pas à celui qui est nécessaire //pour voir la page
-                        $contenu = 'actionConnexion';  // Je le redirige vers l’accueil, car il n’a pas le bon rôle
+                        $contenu = 'actionAccueil';  // Je le redirige vers l’accueil, car il n’a pas le bon rôle
                     } else {
                         $contenu = $explose[0];
                         // Je récupère le nom du contrôleur, car il a le bon rôle
                     }
                 } else {
-                    $contenu = 'actionConnexion';
+                    $contenu = 'actionAccueil';
                 }
             } else {
-                $contenu = 'actionConnexion';  // Page d’accueil, car il n’est pas authentifié
+                $contenu = 'actionAccueil';  // Page d’accueil, car il n’est pas authentifié
             }
         } else {
             $contenu = $explose[0]; //  Je récupère le contrôleur, car il n’a pas besoin d’avoir un rôle

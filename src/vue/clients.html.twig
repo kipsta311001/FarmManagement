@@ -29,34 +29,27 @@
           <div class="col-md-12">
             <div class="content-panel">
               <table class="table">
-                <h4><i class="fa fa-angle-right"></i> Liste des Interventions</h4>
+                <h4><i class="fa fa-angle-right"></i> Liste des clients</h4>
                 <hr>
                 <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>Intervention</th>
-                    <th>Intervenant</th>
-                    <th>Nombre d'hectare</th>
-                    <th>Nombre d'heure</th>
-                    <th>Statut</th>
+                    <th>TVA Intracommunautaire</th>
+                    <th>Nom</th>
+                    <th>Adresse</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                {% for i in interventions %}
+                {% for c in clients %}
                   <tr>
-                    <td>{{i.dateIntervention}}</td>
-                    <td>{{i.libelle}}</td>
-                    <td>{{i.intervenant}}</td>
-                    <td>{{i.ha}}</td>
-                    <td>{{i.heure}}</td>
-                    {% if i.statut == 1 %}
-                    <td> A facturer </td>
-                    {% elseif i.statut == 2 %}
-                    <td> Facturée ( en attente) </td>
-                    {% elseif i.statut  == 3 %}
-                    <td> Payée </td>
-                    {% endif %}
+                    <td>{{c.tvaIntra}}</td>
+                    <td>{{c.nom}}</td>
+                    <td>{{c.adresse}} {{c.codePostal}} {{c.ville}}</td>
+                    <td>
+                      <a href="index.php?page=ajoutClient&idClientUpdate={{c.IdClient}}"><button class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></button></a>
+                      <a href="index.php?page=listeClient&idClientDelete={{c.IdClient}}"><button class="btn btn-danger btn-s"><i class="fa fa-trash-o "></i></button></a>
+                      <a href="index.php?page=listeIntervention&idClient={{c.IdClient}}"><button class="btn btn-success btn-s"><i class="fa fa-arrow-right"></i></button></a>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>

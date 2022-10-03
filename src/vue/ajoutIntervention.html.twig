@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesChampsController!
+{% endblock %}
+
+{% block content %}
+
+	{% if form.valide is defined %}
+		{% if form.valide == false %}
+			<br></br>
+		<div class="row content-panel">
+			<div class="alert alert-danger h3 mb-3 font-weight-normal" role="alert">
+				<h2 class="centered">{{ form.message }}</h2>
+			</div>
+		</div>
+	{% else %}
+		<br></br>
+		<div class="row content-panel">
+		<div class="alert alert-success h3 mb-3 font-weight-normal" role="alert">
+			<h2 class="centered">{{ form.message }}</h2>
+		</div>
+  </div>
+	{% endif %}
+{% endif %}
+
+	<section id="main-content">
+		<section class="wrapper">
+			<div class="row mt">
+				<div class="col-lg-12">
+					<h4>
+						<i class="fa fa-angle-right"></i> Ajouter une intervention</h4>
+					<div class="form-panel">
+						<div class=" form">
+							<form class="cmxform form-horizontal style-form" method="post">
+								<div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Client</label>
+									<div class="col-lg-10">
+										<select class="form-control" id="client" name="client" required />
+										<option class="form-control" value=""> -- Veuillez choisir un client -- </option>
+										{% for c in clients %}
+										<option class="form-control" value="{{c.IdClient}}"> {{c.nom}} {{c.idClient}}</option>
+										{% endfor %}
+										</select>
+									</div>
+								</div>
+                <div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Prestation</label>
+									<div class="col-lg-10">
+										<select class="form-control" id="prestation" name="prestation" required />
+										<option class="form-control" value=""> -- Veuillez choisir une prestation -- </option>
+										{% for p in prestations %}
+										<option class="form-control" value="{{p.idPrestation}}"> {{p.libelle}} </option>
+										{% endfor %}
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2">Chauffeur</label>
+									<div class="col-lg-10">
+										<input class="form-control form-control-inline input-medium default-date-picker" type="text" name="chauffeur" required />
+									</div>
+								</div>
+                <div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Heure de début</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="heureDebut" name="heureDebut" type="time" required/>
+									</div>
+								</div>
+								 <div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Heure de fin</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="heureFin" name="heureFin" type="time" required/>
+									</div>
+								</div>
+                <div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Nombre d'hectare</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="nombreHa" name="nombreHa" type="number" step="0.01" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2">Date d'intervention</label>
+									<div class="col-lg-10">
+										<input class="form-control form-control-inline input-medium default-date-picker" type="date" name="dateIntervention" value="{{date}}" required />
+									</div>
+								</div>
+                	<div class="form-group ">
+									<div class="form-send">
+										<div class="col-sm-3">
+										<button class="btn btn-compose" type="submit" name="btAjouter">
+                                            Ajouter
+                                        </button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /form-panel -->
+				</div>
+				<!-- /col-lg-12 -->
+			</div>
+		</section>
+	</section>
+{% endblock %}

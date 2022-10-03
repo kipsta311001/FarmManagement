@@ -1,49 +1,44 @@
 <?php
 
-function actionlisteIntervention($twig, $db) {
+function actionAjoutIntervention($twig, $db) {
     $form = array();
     $intervention = new Intervention($db);
-    $listeIntervention = $intervention->selectAllByIdParcelle($_GET['idParcelle']);
-    if(isset($_GET['idIntervention'])){
-        $currentDate = date("Y/m/d");
-        $intervention->update($_GET['idIntervention'], $currentDate);
-     }
-     if(isset($_GET['idDel'])){
-        $intervention->delete($_GET['idDel']);
-     }
-    echo $twig->render('listeIntervention.html.twig', array('listeIntervention' => $listeIntervention, 'idParcelle' => $_GET['idParcelle']));
-}
+    $client = new Client($db);
+    $prestation = new Prestation($db);
+    $clients = $client->select();
+    $prestations = $prestation->select();
+    $today = date("Y-m-d");
+    if (isset($_POST['btAjouter'])){
+        var_dump(date("H:i"));
+        $h1=strtotime($_POST['heureDebut']);
 
+        $h2=strtotime($_POST['heureFin']);
 
-function actionStats($twig, $db) {
-    $form = array();
-    $intervention = new Intervention($db);
-    $parcelle = new Parcelle($db);
-    $dataParcelle = $parcelle->selectById($_GET['idParcelle']);
-    $surface = $dataParcelle[0]['surface'];
-    $listeIntervention = $intervention->selectAllByIdParcelle($_GET['idParcelle']);
-    $charge = 0;
-    foreach($listeIntervention as $intervention){
-        if(isset($intervention['variete'])){
-            $variete = $intervention['variete'];
-        }
-        if(isset($intervention['cout'])){
-            $charge = $charge + $intervention['cout'];
-        }
-        if(isset($intervention['rendement'])){
-            $rendement = $intervention['rendement'];
-        }
-        if(isset($intervention['prix_vente'])){
-            $prix_vente = $intervention['prix_vente'];
+        $heure = date('H:i',$h2-$h1);
+       
+        $exec = $intervention->insert($_POST['client'], $_POST['prestation'], $_POST['nombreHa'], $heure, $_POST['chauffeur'], $_POST['dateIntervention'], 1, NULL);
+        if (!$exec) {
+            $form['valide'] = false;
+            $form['message'] = "Probleme d'insertion de l'intervention";
+        }else{
+            $form['valide'] = true;
+            $form['message'] = "Intervention ajoutée avec succès"; 
         }
     }
-    $ca = ( $rendement/100 * $surface ) * $prix_vente;
-    $benef = $ca - $charge;
-    $coutByHa = $charge / $surface;
-    $benefByHa = $benef / $surface;
-    
-
-    echo $twig->render('statistiques.html.twig', array('listeIntervention' => $listeIntervention, 'parcelle' => $dataParcelle
-    , 'variete' => $variete, 'charge' => $charge, 'rendement' => $rendement, 'prix_vente' => $prix_vente, 'benef' => $benef
-    , 'coutByHa' => $coutByHa, 'benefByHa' => $benefByHa, 'ca' => $ca));
+  
+    echo $twig->render('ajoutIntervention.html.twig', array('form'=>$form, 'prestations'=>$prestations, 'clients'=>$clients, 'date'=>$today));
 }
+
+function actionListeIntervention($twig, $db) {
+    $form = array();
+    $intervention = new Intervention($db);
+    if (isset($_GET['idClient'])){
+        $interventionClient = $intervention->selectByClient($_GET['idClient']);
+    }else{
+        $form['valide'] = false;
+        $form['message'] = "Client incorrect";
+    }
+    echo $twig->render('listeIntervention.html.twig', array('form'=>$form, 'interventions'=>$interventionClient));
+}
+
+

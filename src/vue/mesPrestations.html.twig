@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesChampsController!
+{% endblock %}
+
+{% block content %}
+
+	{% if form.valide is defined %}
+		{% if form.valide == false %}
+			<br></br>
+		<div class="row content-panel">
+			<div class="alert alert-danger h3 mb-3 font-weight-normal" role="alert">
+				<h2 class="centered">{{ form.message }}</h2>
+			</div>
+		</div>
+	{% else %}
+
+		<div class="alert alert-success h3 mb-3 font-weight-normal" role="alert">
+			{{ form.message }}
+		</div>
+
+	{% endif %}
+{% endif %}
+
+	<section id="main-content">
+		<section class="wrapper">
+			<div class="row mt">
+				<div class="col-lg-12">
+					<h4>
+						<i class="fa fa-angle-right"></i>
+                        {% if form.update == true %}
+                            Modifier une prestation</h4>
+                        {% else %}
+                            Ajouter une prestation</h4>
+                        {% endif %}
+						
+					<div class="form-panel">
+						<div class=" form">
+							<form class="cmxform form-horizontal style-form" method="post">
+								<div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Nom de la prestation</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="libelle" name="libelle" type="text" required
+                                        {% if form.update == true %}
+                                        value = "{{maPrestation.libelle}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2">Tarif par heure</label>
+									<div class="col-lg-10">
+										<input class="form-control form-control-inline input-medium default-date-picker" type="number" step='0.01' name="tarifHeure" required {% if form.update == true %}
+                                        value = "{{maPrestation.tarifHeure}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+								<div class="form-group ">
+									<label for="curl" class="control-label col-lg-2">Tarif par hectare</label>
+									<div class="col-lg-10">
+										<input class="form-control " name="tarifHa" id="tarifHa" type="number" step='0.01'
+                                        {% if form.update == true %}
+                                        value = "{{maPrestation.tarifHa}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+                                <div class="form-group ">
+									<label for="curl" class="control-label col-lg-2">TVA</label>
+									<div class="col-lg-10">
+										<input class="form-control " name="TVA" id="TVA" type="number"
+                                        {% if form.update == true %}
+                                        value = "{{maPrestation.TVA}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+                                <hr>
+							<div class="form-group ">
+									<div class="form-send">
+										<div class="col-sm-3">
+											<button class="btn btn-compose" type="submit" name="btAjouter">
+                                             {% if form.update == true %}
+                                             Modifier
+                                             {% else %}
+                                            Ajouter
+                                            {% endif %}
+                                        </button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /form-panel -->
+				</div>
+				<!-- /col-lg-12 -->
+			</div>
+		</section>
+	</section>
+
+     <section id="main-content">
+      <section class="wrapper">
+        <!-- row -->
+        <div class="row mt">
+          <div class="col-md-12">
+            <div class="content-panel">
+              <table class="table">
+                <h4><i class="fa fa-angle-right"></i> Liste des Prestations</h4>
+                <hr>
+                <thead>
+                  <tr>
+                    <th>Nom</th>
+                    <th>Tarif par heure</th>
+                    <th>Tarif par hectare</th>
+                    <th> TVA </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for p in prestation %}
+                  <tr>
+                    <td>{{p.libelle}}</td>
+                    <td>{{p.tarifHeure}} €</td>
+                    <td>{{p.tarifHa}} €</td>
+                    <td>{{p.TVA}} %</td>
+                    <td>
+                      <a href="index.php?page=mesprestations&idPrestationUpdate={{p.idPrestation}}"><button class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></button></a>
+                       <a href="index.php?page=mesprestations&idPrestationDelete={{p.idPrestation}}"><button class="btn btn-danger btn-s"><i class="fa fa-trash-o "></i></button></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+        <br></br>
+      </section>
+    </section>
+{% endblock %}

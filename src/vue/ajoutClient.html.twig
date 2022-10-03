@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MesChampsController!
+{% endblock %}
+
+{% block content %}
+
+	{% if form.valide is defined %}
+		{% if form.valide == false %}
+			<br></br>
+		<div class="row content-panel">
+			<div class="alert alert-danger h3 mb-3 font-weight-normal" role="alert">
+				<h2 class="centered">{{ form.message }}</h2>
+			</div>
+		</div>
+	{% else %}
+		<br></br>
+		<div class="row content-panel">
+		<div class="alert alert-success h3 mb-3 font-weight-normal" role="alert">
+			<h2 class="centered">{{ form.message }}</h2>
+		</div>
+  </div>
+	{% endif %}
+{% endif %}
+
+	<section id="main-content">
+		<section class="wrapper">
+			<div class="row mt">
+				<div class="col-lg-12">
+					<h4>
+						<i class="fa fa-angle-right"></i>
+                        {% if form.update == true %}
+                            Modifier un client</h4>
+                        {% else %}
+                            Ajouter un client</h4>
+                        {% endif %}
+						
+					<div class="form-panel">
+						<div class=" form">
+							<form class="cmxform form-horizontal style-form" method="post">
+								<div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Nom du client</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="nom" name="nom" type="text" required
+                                        {% if form.update == true %}
+                                        value = "{{unClient.nom}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+                <div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Adresse</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="adresse" name="adresse" type="text" required
+                                        {% if form.update == true %}
+                                        value = "{{unClient.adresse}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+                <div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Code postal</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="codePostal" name="codePostal" type="number" required
+                                        {% if form.update == true %}
+                                        value = "{{unClient.codePostal}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+                <div class="form-group ">
+									<label for="cname" class="control-label col-lg-2">Ville</label>
+									<div class="col-lg-10">
+										<input class=" form-control" id="ville" name="ville" type="text" required
+                                        {% if form.update == true %}
+                                        value = "{{unClient.ville}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2">TVA intracommunautaire</label>
+									<div class="col-lg-10">
+										<input class="form-control form-control-inline input-medium default-date-picker" type="text" name="tvaIntra" required 
+                                        {% if form.update == true %}
+                                        value = "{{unClient.tvaIntra}}"
+                                        {% endif %}/>
+									</div>
+								</div>
+                	<div class="form-group ">
+									<div class="form-send">
+										<div class="col-sm-3">
+											<button class="btn btn-compose" type="submit" name="btAjouter">
+                                             {% if form.update == true %}
+                                             Modifier
+                                             {% else %}
+                                            Ajouter
+                                            {% endif %}
+                                        </button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /form-panel -->
+				</div>
+				<!-- /col-lg-12 -->
+			</div>
+		</section>
+	</section>
+{% endblock %}

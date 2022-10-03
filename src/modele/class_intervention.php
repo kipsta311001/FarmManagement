@@ -1,43 +1,56 @@
-
 <?php
 
 class Intervention{
     private $db;
-    private $selectAllByIdParcelle;
+    private $insert;
+    private $select;
+    private $selectByClient;
     private $delete;
     private $update;
 
-
     public function __construct($db){
         $this->db=$db;
-        $this->selectAllByIdParcelle = $db->prepare("SELECT * from (SELECT id, idParcelle, produit, quantite_ha, date_intervention, cout, NULL as nom, NULL as description, NULL as rendement, NULL as prix_vente, null as variete, iType, isActive FROM phyto
-        UNION ALL 
-        SELECT id, idParcelle, NULL as produit, NULL as quantite_ha, date_intervention, cout, nom, description, NULL AS rendement, NULL AS prix_vente, null as variete, iType, NULL AS isActive FROM travail_du_sol
-        UNION ALL 
-        SELECT id, idParcelle,  NULL AS produit,  quantite_ha, date_intervention, cout, nom, NULL AS description, NULL AS rendement, NULL AS prix_vente, null as variete, iType, NULL AS isActive FROM engrais_org    
-         UNION ALL 
-        SELECT id, idParcelle,  NULL AS produit,  quantite_ha, date_intervention, cout, nom, NULL AS description, NULL AS rendement, NULL AS prix_vente, null as variete, iType, NULL AS isActive FROM engrais_min           
-        UNION ALL 
-        SELECT id, idParcelle,  NULL AS produit,  null as quantite_ha, date_intervention, cout, NULL AS nom, NULL AS description, rendement, prix_vente, null as variete, iType, NULL AS isActivee FROM recolte    
-        UNION ALL
-        SELECT id, idParcelle,  NULL AS produit,  null as quantite_ha, date_intervention, cout, NULL AS nom, NULL AS description, null as rendement, null as prix_vente, variete, iType, NULL AS isActive FROM semence    
-        UNION ALL          
-        SELECT id, idParcelle,  NULL AS produit,  NULL AS quantite_ha, date_intervention, cout, nom, NULL AS description, null as rendement, null as prix_vente, null as variete, iType, NULL AS isActive FROM culture_intermediaire)
-        as intervention WHERE idParcelle = :idParcelle order by date_intervention
-        ");
-        $this->delete = $db->prepare("DELETE FROM phyto WHERE id = :id");
-        $this->update = $db->prepare("UPDATE phyto SET isActive = 0, date_intervention = :currentDate  WHERE id = :id");
+        $this->insert = $db->prepare("INSERT into interventions(idClient, idPrestation, ha, heure, intervenant, dateIntervention, statut, dateFacturation) values(:idClient, :idPrestation, :ha, :heure, :intervenant, :dateIntervention, :statut, :dateFacturation)");
+        $this->select = $db->prepare("SELECT * from interventions");
+        $this->selectByClient = $db->prepare("SELECT * from interventions i INNER JOIN prestations p ON p.idPrestation = i.idPrestation where idClient = :id ORDER BY  i.dateIntervention ");
+        $this->delete = $db->prepare("DELETE from client where idClient = :id");
+        $this->update = $db->prepare("UPDATE client SET nom = :nom, adresse = :adresse, codePostal = :codePostal, ville = :ville, tvaIntra= :tvaIntra WHERE idClient = :id");
+
     }
 
+    public function insert($idClient, $idPrestation, $ha, $heure, $intervenant, $dateIntervention, $statut, $dateFacturation) { // Étape 3
+        $r = true;
+        $this->insert->execute(array(':idClient' => $idClient, ':idPrestation' => $idPrestation,  ':ha' => $ha, ':heure' => $heure, ':intervenant' => $intervenant, ':dateIntervention' => $dateIntervention, ':statut' => $statut , ':dateFacturation' => $dateFacturation));
+        if ($this->insert->errorCode() != 0) {
+            print_r($this->insert->errorInfo());
+            $r = false;
+        } return $r;
+    }
 
-    public function selectAllByIdParcelle($idParcelle){
-        $this->selectAllByIdParcelle->execute(array(':idParcelle'=>$idParcelle));
-        if ($this->selectAllByIdParcelle->errorCode()!=0){
-            print_r($this->selectAllByIdParcelle->errorInfo());
+    public function update($id, $nom, $adresse, $codePostal, $ville, $tvaIntra) { // Étape 3
+        $r = true;
+        $this->update->execute(array(':id' => $id, ':nom' => $nom, ':adresse' => $adresse, ':codePostal' => $codePostal, ':ville' => $ville, ':tvaIntra' => $tvaIntra));
+        if ($this->update->errorCode() != 0) {
+            print_r($this->update->errorInfo());
+            $r = false;
+        } return $r;
+    }
+
+    public function select(){
+        $this->select->execute(array());
+        if ($this->select->errorCode()!=0){
+            print_r($this->select->errorInfo());
         }
-        return $this->selectAllByIdParcelle->fetchAll();
+        return $this->select->fetchAll();
     }
 
+    public function selectByClient($id){
+        $this->selectByClient->execute(array(':id'=>$id));
+        if ($this->selectByClient->errorCode()!=0){
+            print_r($this->selectByClient->errorInfo());
+        }
+        return $this->selectByClient->fetchAll();
+    }
     public function delete($id){
         $this->delete->execute(array(':id'=>$id));
         if ($this->delete->errorCode()!=0){
@@ -45,13 +58,6 @@ class Intervention{
         }
         return $this->delete->fetch();
     }
+    
 
-    public function update($id, $currentDate){
-        $this->update->execute(array(':id'=>$id, ':currentDate'=>$currentDate));
-        if ($this->update->errorCode()!=0){
-            print_r($this->update->errorInfo());
-        }
-        return $this->update->fetch();
-    }
 }
-
