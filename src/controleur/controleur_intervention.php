@@ -3,7 +3,7 @@
 function actionAjoutIntervention($twig, $db) {
     $form = array();
     $intervention = new Intervention($db);
-    $client = new Client($db);
+    $client = new Client($db); 
     $prestation = new Prestation($db);
     $clients = $client->select();
     $prestations = $prestation->select();
